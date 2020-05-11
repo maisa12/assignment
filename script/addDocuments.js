@@ -1,5 +1,5 @@
 const faker = require('faker');
-const Employee = require('./utils/models/employees');
+const Employee = require('./utils/models/employee');
 const mongoose = require('mongoose');
 const search = require('./utils/search');
 //amount of docs to add
