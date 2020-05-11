@@ -25,7 +25,7 @@ const search = require('./utils/search');
           const formData = {
             my_file:  fs.createReadStream(__dirname + '/utils/csvFiles/postFile.csv'),
           };
-         request.post({url:'http://localhost:3000/file', formData: formData}, function optionalCallback(err, httpResponse, body) {
+         request.post({url:'http://localhost:3000/upload', formData: formData}, function optionalCallback(err, httpResponse, body) {
                 if (err) {
                             return console.error('upload failed:', err);
                             }

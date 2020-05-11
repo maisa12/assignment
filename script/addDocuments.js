@@ -7,9 +7,9 @@ let docsAmount = 1000;
 //check employeeNo
 function check(array, dbArray){
     try{
-      var holeArray = array.concat(dbArray);
+      var wholeArray = array.concat(dbArray);
       var employeeN = faker.random.number();
-      let data = search(holeArray, employeeN);
+      let data = search(wholeArray, employeeN);
       if(data===-1){ 
         array.push({
           employeeNo: employeeN,

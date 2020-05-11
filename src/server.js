@@ -22,13 +22,9 @@ app.get('/', async(req, res)=>{
  const data = await Employee.find({isDeleted: false},{__v: false, _id:false}).sort({employeeNo: 1}).lean().exec();
     res.send(data);
 });
-app.post('/file',  upload.any(), (req, res, next)=>{
+app.post('/upload',  upload.any(), (req, res, next)=>{
     res.send('ok');
     createReport();
-})
-app.get('/del',  upload.any(),async (req, res)=>{
-    res.send('ok');
-    await Employee.deleteMany({})
 })
 
 mongoose.connect(
