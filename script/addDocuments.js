@@ -55,7 +55,7 @@ async function create(amount){
 (async function addData(amount){
     try{
     mongoose.connect(
-        'mongodb://test/test',
+        'mongodb://127.0.0.1:27017/test',
         {useNewUrlParser: true },
      ()=>{
         console.log('connected')

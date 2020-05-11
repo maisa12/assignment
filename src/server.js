@@ -26,7 +26,7 @@ app.post('/file',  upload.any(), (req, res, next)=>{
 })
 
 mongoose.connect(
-    'mongodb://test/test',
+    'mongodb://127.0.0.1:27017/test',
     {useNewUrlParser: true },
  ()=>{
     console.log('connected')
