@@ -3,7 +3,7 @@ const Employee = require('./utils/models/employee');
 const mongoose = require('mongoose');
 const search = require('./utils/search');
 //amount of docs to add
-let docsAmount = 200;
+let docsAmount = 1000;
 //check employeeNo
 function check(array, dbArray){
     try{
