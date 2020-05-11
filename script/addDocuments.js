@@ -3,7 +3,7 @@ const Employee = require('./utils/models/employee');
 const mongoose = require('mongoose');
 const search = require('./utils/search');
 //amount of docs to add
-let docsAmount = 3;
+let docsAmount = 200;
 //check employeeNo
 function check(array, dbArray){
     try{
@@ -18,6 +18,7 @@ function check(array, dbArray){
           email: faker.internet.email(),
           phone: faker.phone.phoneNumber(),
           position: faker.name.jobType(),
+          createDate: new Date(faker.date.past()),
           hireDate: new Date(faker.date.past()),
           updateDate: new Date(faker.date.past()),
         })

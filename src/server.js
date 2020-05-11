@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const createReport = require('./utils/createReport');
 const mongoose = require('mongoose');
 const Employee = require('./models/employee');
 var multer  = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, __dirname+'/uploaded')
+        cb(null, __dirname+'/utils/uploaded')
       },
     filename: function (req, file, cb) {
   
@@ -22,7 +23,12 @@ app.get('/', async(req, res)=>{
     res.send(data);
 });
 app.post('/file',  upload.any(), (req, res, next)=>{
-    res.send('ok')
+    res.send('ok');
+    createReport();
+})
+app.get('/del',  upload.any(),async (req, res)=>{
+    res.send('ok');
+    await Employee.deleteMany({})
 })
 
 mongoose.connect(
