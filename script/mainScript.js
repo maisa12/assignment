@@ -44,11 +44,13 @@ function convertIntoCsvFile(data){
 function check(array, dbArray){
     try{
       var holeArray = array.concat(dbArray);
-      var employeeN = faker.random.number();
+      var employeeN =  {
+        employeeNo: faker.random.number()
+      };
       let data = binarySearch(holeArray, employeeN);
       if(data===-1){
         array.push({
-              employeeNo: employeeN,
+              employeeNo: employeeN.employeeNo,
               firstName: faker.name.firstName(),
               lastName: faker.name.lastName(),
               email: faker.internet.email(),
