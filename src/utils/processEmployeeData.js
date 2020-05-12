@@ -1,17 +1,16 @@
-const search = require('./search');
+const binarySearch = require('./binarySearch');
 const Employee = require('../models/employee');
-let mainScript= async function (dbArray, upArray){
+let processEmployeeData = async function (dbArray, upArray){
     let report = [];
     let properties = [];
     for(let property in upArray[0]){
-        properties.push(property);
+         properties.push(property);
     }
-  
     for(let item of dbArray){
-        let result = search(upArray, item);
+        let result = binarySearch(upArray, item);
         if(result===-1){
             if(!item.isDeleted){
-                //update isDeleted = true
+                //update isDeleted = false
                 await Employee.update({employeeNo: item.employeeNo},  { $set: { isDeleted: true }})
                 report.push({
                     employeeNo: item.employeeNo,
@@ -61,4 +60,4 @@ let mainScript= async function (dbArray, upArray){
     }
  return report
 };
-module.exports = mainScript;
+module.exports = processEmployeeData;

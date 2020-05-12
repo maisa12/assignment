@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const EmployeesSchema = mongoose.Schema({
-    employeeNo: Number,
+    employeeNo: {
+        type: Number,
+        index: true 
+    },
     firstName: String,
     lastName: String,
     email: String,
@@ -15,4 +18,5 @@ const EmployeesSchema = mongoose.Schema({
         default: false
     }
 });
+EmployeesSchema.index({name:'employeeNo', type: -1});
 module.exports = mongoose.model('Employee', EmployeesSchema);

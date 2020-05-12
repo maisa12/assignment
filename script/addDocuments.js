@@ -1,7 +1,7 @@
 const faker = require('faker');
 const Employee = require('./utils/models/employee');
 const mongoose = require('mongoose');
-const search = require('./utils/search');
+const binarySearch = require('../src/utils/binarySearch');
 //amount of docs to add
 let docsAmount = 1000;
 //check employeeNo
@@ -9,18 +9,18 @@ function check(array, dbArray){
     try{
       var wholeArray = array.concat(dbArray);
       var employeeN = faker.random.number();
-      let data = search(wholeArray, employeeN);
+      let data = binarySearch(wholeArray, employeeN);
       if(data===-1){ 
         array.push({
-          employeeNo: employeeN,
-          firstName: faker.name.firstName(),
-          lastName: faker.name.lastName(),
-          email: faker.internet.email(),
-          phone: faker.phone.phoneNumber(),
-          position: faker.name.jobType(),
-          createDate: new Date(faker.date.past()),
-          hireDate: new Date(faker.date.past()),
-          updateDate: new Date(faker.date.past()),
+                employeeNo: employeeN,
+                firstName: faker.name.firstName(),
+                lastName: faker.name.lastName(),
+                email: faker.internet.email(),
+                phone: faker.phone.phoneNumber(),
+                position: faker.name.jobType(),
+                createDate: new Date(faker.date.past()),
+                hireDate: new Date(faker.date.past()),
+                updateDate: new Date(faker.date.past()),
         })
         return
       }
@@ -32,8 +32,8 @@ function check(array, dbArray){
  };
 //create array of new users
 async function create(amount){
-    try{
-    let response =  await Employee.find({}, {_id: false, __v: false}).limit(10).lean().exec();
+try{
+    let response =  await Employee.find({}, {_id: false, __v: false}).lean().exec();
     let newUsers = []; 
     for(let i=0; i<amount; i++){
         check(newUsers, response);
@@ -47,7 +47,7 @@ async function create(amount){
         }
         mongoose.connection.close()
     });
-    } catch(e){
+}   catch(e){
         console.log(e)
     }
 }
