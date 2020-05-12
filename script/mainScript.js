@@ -2,6 +2,7 @@ const Employee = require('./utils/models/employee');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const faker = require('faker');
+const config = require('../config');
 const stringify = require('csv-stringify');
 const request = require('request')
 const binarySearch = require('../src/utils/binarySearch');
@@ -24,7 +25,7 @@ function convertIntoCsvFile(data){
                            my_file:  fs.createReadStream(__dirname + '/utils/csvFiles/postFile.csv'),
                       };
   request.post({
-                  url:'http://localhost:3000/upload', formData: formData
+                  url:`http://localhost:${config.port}/upload`, formData: formData
                 }, 
     function optionalCallback(err, httpResponse, body) {
           if (err) {
@@ -108,7 +109,7 @@ try{
 (async function(){
   try{
     mongoose.connect(
-      'mongodb://127.0.0.1:27017/test',
+      config.db,
       {useNewUrlParser: true },
    ()=>{
       console.log('connected')

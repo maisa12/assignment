@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const config = require('../config');
 const mongoose = require('mongoose');
 const Employee = require('./models/employee');
 const read = require('./utils/convertCsv');
@@ -38,9 +38,9 @@ app.post('/upload',  upload.any(), async(req, res, next)=>{
 });
 
 mongoose.connect(
-    'mongodb://127.0.0.1:27017/test',
+    config.db,
     {useNewUrlParser: true },
  ()=>{
     console.log('connected')
 });
-app.listen(port, ()=>console.log(`Server is listening: ${port}`));
+app.listen(config.port, ()=>console.log(`Server is listening: ${config.port}`));
