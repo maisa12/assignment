@@ -8,8 +8,10 @@ let docsAmount = 1000;
 function check(array, dbArray){
     try{
       var wholeArray = array.concat(dbArray);
+      wholeArray.sort((a,b)=>a.employeeNo-b.employeeNo);
       var employeeN = faker.random.number();
-      let data = binarySearch(wholeArray, employeeN);
+      let val ={employeeNo: employeeN};
+      let data = binarySearch(wholeArray, val);
       if(data===-1){ 
         array.push({
                 employeeNo: employeeN,

@@ -11,7 +11,7 @@ let processEmployeeData = async function (dbArray, upArray){
         if(result===-1){
             if(!item.isDeleted){
                 //update isDeleted = false
-                await Employee.update({employeeNo: item.employeeNo},  { $set: { isDeleted: true }})
+                await Employee.updateOne({employeeNo: item.employeeNo},  { $set: { isDeleted: true, updateDate: new Date(Date.now()) }})
                 report.push({
                     employeeNo: item.employeeNo,
                     status: 'deleted'
@@ -22,15 +22,17 @@ let processEmployeeData = async function (dbArray, upArray){
             result.isChecked = true;
             for(let prop of properties){
                 if(result[prop]!=item[prop]){
+                    result.updateDate = new Date(Date.now());
                     await Employee.updateOne({employeeNo: item.employeeNo},  { $set: result})
                     report.push({
                         employeeNo: item.employeeNo,
                         status: 'updated'
                     });
+                    break;
                 }
             }
             if(item.isDeleted){
-                await Employee.updateOne({employeeNo: item.employeeNo},  { $set: { isDeleted: false}})
+                await Employee.updateOne({employeeNo: item.employeeNo},  { $set: { isDeleted: false, updateDate: new Date(Date.now())}})
                 report.push({
                     employeeNo: item.employeeNo,
                     status: 'restored'

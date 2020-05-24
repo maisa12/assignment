@@ -10,13 +10,21 @@ const EmployeesSchema = mongoose.Schema({
     email: String,
     phone: String,
     position: String,
-    hireDate: Date,
-    createDate: Date,
-    updateDate: Date,
+    hireDate: {
+        type: Date,
+        default: new Date(Date.now())
+    },
+    createDate: {
+        type: Date,
+        default: new Date(Date.now())
+    },
+    updateDate: {
+        type: Date,
+        default: new Date(Date.now())
+    },
     isDeleted: {
         type: Boolean,
         default: false
     }
 });
-EmployeesSchema.index({name:'employeeNo', type: -1});
 module.exports = mongoose.model('Employee', EmployeesSchema);
